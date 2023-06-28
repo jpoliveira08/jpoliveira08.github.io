@@ -9,31 +9,34 @@
 
     <script src="assets/jQuery/jquery.js"></script>
     <script src="assets/DataTables/datatables.min.js"></script>
-    <title>Document</title>
+    <title>Consultar entrada de usinas</title>
 </head>
 <body>
-    <header>
-        Detectar entrada em operações de usinas
-    </header>
-    <main class="container">
-        <article class="box">
-            <section class="box__inputs">
-                <label for="month">Digite o mês</label>
-                <input type="date" name="month">
-                
-            </section>
-            <section>
-                
-            </section>
-        </article>
-    </main>
-    <footer>
-        Paleta de cores
-        #d4deea
-        #2f3444
-        #ef420f
-    </footer>
+    <label for="initial_date">Data inicial</label>
+    <input type="date" name="initial_date">
+    <label for="final_date">Data final</label>
+    <input type="date" name="final_date">
     <script src="index.js"></script>
+
+    <a id="buscar" class="btn btn-primary">Buscar</a>
+
+
+
+    <section>
+        <table id="table_usinas_operacao" class="table table-bordered" >
+            <thead">
+                <tr>
+                    <th>Nome usina</th>
+                    <th>Modalidade</th>
+                    <th>Unidade geradora</th>
+                    <th>Potência (kW)</th>
+                    <th>Data Liberação</th>
+                    <th>Localização</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
