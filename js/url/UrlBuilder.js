@@ -13,6 +13,7 @@ const urlBuilder = () => {
     }
 
     const buildUrl = (parameters) => {
+
         let url = new URL(urlBase);
 
         fillDefaultParameters(url);

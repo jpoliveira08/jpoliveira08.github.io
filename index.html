@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="assets/DataTables/datatables.min.css" rel="stylesheet"/>
@@ -10,34 +12,54 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/jQuery/jquery.js"></script>
     <script src="assets/DataTables/datatables.min.js"></script>
-    <title>Consultar entrada de usinas</title>
+    <title>Entrada de usinas em operação</title>
 </head>
 <body>
-    <label for="initial_date">Data inicial</label>
-    <input id="initial_date" type="date" name="initial_date">
-    <label for="final_date">Data final</label>
-    <input id="final_date" type="date" name="final_date">
+    <main class="container p-4">
+        <article>
+            <div class="row">
+                <h1 class="text-center">
+                    Entrada em operação de usinas
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label" for="initial_date">Data inicial</label>
+                    <input id="initial_date" class="form-control" type="date" name="initial_date">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="final_date">Data final</label>
+                    <input id="final_date" class="form-control" type="date" name="final_date">
+                </div>
+                <div class="col-md-3">
+                    
+                </div>
+            </div>
 
-    <a id="buscar" class="btn btn-primary">Buscar</a>
-
-    <button id="validate_dou" type="button" class="btn btn-success">
-        Verificar dados no D.O.U
-    </button>
-
-    <section>
-        <table id="table_usinas_operacao" class="table table-bordered" >
-            <thead">
-                <tr>
-                    <th>Nome usina</th>
-                    <th>Modalidade</th>
-                    <th>Unidade geradora</th>
-                    <th>Potência (kW)</th>
-                    <th>Data Liberação</th>
-                    <th>Localização</th>
-                </tr>
-            </thead>
-        </table>
-    </section>
+            <div class="row">
+                <button id="load_table" class="btn btn-primary my-2" type="button">Buscar</button>
+                <button id="check_dou" class="btn btn-success my-2" type="button" >
+                    Verificar dados no D.O.U
+                </button>
+            </div>
+        </article>
+    
+        <article>
+            <table id="table_usinas_operacao" class="table table-bordered" >
+                <thead>
+                    <tr>
+                        <th>Nome usina</th>
+                        <th>Tipo</th>
+                        <th>CEG</th>
+                        <th>Modalidade comercialização</th>
+                        <th>Potência (kW)</th>
+                        <th>Localização</th>
+                    </tr>
+                </thead>
+            </table>
+        </article>
+    </main>
+    
     <script type="module" src="js/index.js"></script>
 </body>
 </html>
