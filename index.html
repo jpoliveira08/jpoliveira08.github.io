@@ -31,13 +31,23 @@
                     <label class="form-label" for="final_date">Data final</label>
                     <input id="final_date" class="form-control" type="date" name="final_date">
                 </div>
-                <div class="col-md-3">
-                    
+                <div class="col-md-4 text-center">
+                    <div class="row">
+                        <label class="form-label mb-3"  data-toggle="tooltip" data-placement="top" title="O tipo de operação não influencia nos dados do D.O.U">Tipo de operação</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="operation_type" id="operation_type__comercial" value="comercial" checked>
+                        <label class="form-check-label" for="inlineRadio1">Comercial</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="operation_type" id="operation_type__teste" value="teste">
+                        <label class="form-check-label" for="inlineRadio2">Teste</label>
+                      </div>
                 </div>
             </div>
 
-            <div class="row">
-                <button id="load_table" class="btn btn-primary my-2" type="button">Buscar</button>
+            <div class="row">   
+                <button id="load_table" class="btn btn-primary mt-2" type="button">Buscar</button>
                 <button id="check_dou" class="btn btn-success my-2" type="button" >
                     Verificar dados no D.O.U
                 </button>
@@ -50,10 +60,11 @@
                     <tr>
                         <th>Nome usina</th>
                         <th>Tipo</th>
-                        <th>CEG</th>
                         <th>Modalidade comercialização</th>
                         <th>Potência (kW)</th>
                         <th>Localização</th>
+                        <th>Data liberação teste</th>
+                        <th>Data liberação comercial</th>
                     </tr>
                 </thead>
             </table>

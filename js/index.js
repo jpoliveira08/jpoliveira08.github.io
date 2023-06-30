@@ -20,8 +20,26 @@ $('#load_table').click(() => {
         return;
     }
 
-    const parameters = hydrateInputDateBrazilianToAmerican();
+    let $operationTypes = $('input[name="operation_type"]:checked');
+    
+    if ($operationTypes.length === 0) {
+        alert('Selecione ao menos um tipo de operação');
+        return;
+    }
+    
+    let operationTypes = [];
 
+    Object.values($operationTypes).forEach(element => {
+        if (element.checked) {
+            operationTypes.push(element.value);
+        }
+    });
+
+    const parameters = {
+        ...hydrateInputDateBrazilianToAmerican(),
+        operationTypes: operationTypes
+    }
+    
     if ($.fn.DataTable.isDataTable('#table_usinas_operacao')) {
         $('#table_usinas_operacao').DataTable().destroy();
     }
