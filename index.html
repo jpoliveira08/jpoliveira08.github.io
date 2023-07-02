@@ -1,76 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link href="assets/DataTables/datatables.min.css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link href="assets/DataTables/datatables.min.css" rel="stylesheet"/>
 
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/jQuery/jquery.js"></script>
-    <script src="assets/DataTables/datatables.min.js"></script>
-    <title>Entrada de usinas em operação</title>
-</head>
-<body>
-    <main class="container p-4">
-        <article>
-            <div class="row">
-                <h1 class="text-center">
-                    Entrada em operação de usinas
-                </h1>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label class="form-label" for="initial_date">Data inicial</label>
-                    <input id="initial_date" class="form-control" type="date" name="initial_date">
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/jQuery/jquery.js"></script>
+        <script src="assets/DataTables/datatables.min.js"></script>
+
+        <title>Entrada de usinas em operação</title>
+    </head>
+    <body>
+        <main class="container p-4">
+            <article>
+                <div class="row">
+                    <h1 class="text-center">
+                        Entrada em operação de usinas
+                    </h1>
                 </div>
-                <div class="col-md-4">
-                    <label class="form-label" for="final_date">Data final</label>
-                    <input id="final_date" class="form-control" type="date" name="final_date">
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="row">
-                        <label class="form-label mb-3"  data-toggle="tooltip" data-placement="top" title="O tipo de operação não influencia nos dados do D.O.U">Tipo de operação</label>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label" for="initial_date">Data inicial</label>
+                        <input id="initial_date" class="form-control" type="date" name="initial_date">
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="operation_type" id="operation_type__comercial" value="comercial" checked>
-                        <label class="form-check-label" for="inlineRadio1">Comercial</label>
+                    <div class="col-md-3">
+                        <label class="form-label" for="final_date">Data final</label>
+                        <input id="final_date" class="form-control" type="date" name="final_date">
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="operation_type" id="operation_type__teste" value="teste">
-                        <label class="form-check-label" for="inlineRadio2">Teste</label>
-                      </div>
+                    <div class="col-md-3 text-center">
+                        <div class="row">
+                            <label
+                                class="form-label mb-3"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                            >
+                                Tipo de operação
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="operation_type"
+                                id="operation_type__comercial"
+                                value="comercial" checked
+                            >
+                            <label class="form-check-label" for="inlineRadio1">Comercial</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="operation_type"
+                                id="operation_type__teste"
+                                value="teste"
+                            >
+                            <label class="form-check-label" for="inlineRadio2">Teste</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button
+                            id="load_table"
+                            class="btn btn-primary mt-4 fill-column"
+                            type="button"
+                        >
+                            Buscar
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">   
-                <button id="load_table" class="btn btn-primary mt-2" type="button">Buscar</button>
-                <button id="check_dou" class="btn btn-success my-2" type="button" >
-                    Verificar dados no D.O.U
-                </button>
-            </div>
-        </article>
-    
-        <article>
-            <table id="table_usinas_operacao" class="table table-bordered" >
-                <thead>
-                    <tr>
-                        <th>Nome usina</th>
-                        <th>Tipo</th>
-                        <th>Modalidade comercialização</th>
-                        <th>Potência (kW)</th>
-                        <th>Localização</th>
-                        <th>Data liberação teste</th>
-                        <th>Data liberação comercial</th>
-                    </tr>
-                </thead>
-            </table>
-        </article>
-    </main>
-    
-    <script type="module" src="js/index.js"></script>
-</body>
+                <div class="row">   
+                    <button id="check_dou" class="btn btn-success my-2" type="button" >
+                        Verificar dados no D.O.U
+                    </button>
+                </div>
+            </article>
+        
+            <article>
+                <table id="table_usinas_operacao" class="table table-bordered" >
+                    <thead>
+                        <tr>
+                            <th>Nome usina</th>
+                            <th>Tipo</th>
+                            <th>Modalidade comercialização</th>
+                            <th>Potência (kW)</th>
+                            <th>Localização</th>
+                            <th>Data liberação teste</th>
+                            <th>Data liberação comercial</th>
+                        </tr>
+                    </thead>
+                </table>
+            </article>
+        </main>
+        
+        <script type="module" src="js/index.js"></script>
+    </body>
 </html>
