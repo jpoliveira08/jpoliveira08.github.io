@@ -1,103 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link href="assets/DataTables/datatables.min.css" rel="stylesheet"/>
-
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/jQuery/jquery.js"></script>
-        <script src="assets/DataTables/datatables.min.js"></script>
-
-        <title>Entrada de usinas em operação</title>
-    </head>
-    <body>
-        <main class="container p-4">
-            <article>
-                <div class="row">
-                    <h1 class="text-center">
-                        Entrada em operação de usinas
-                    </h1>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label class="form-label" for="initial_date">Data inicial</label>
-                        <input id="initial_date" class="form-control" type="date" name="initial_date">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label" for="final_date">Data final</label>
-                        <input id="final_date" class="form-control" type="date" name="final_date">
-                    </div>
-                    <div class="col-md-3 text-center">
-                        <div class="row">
-                            <label
-                                class="form-label mb-3"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                            >
-                                Tipo de operação
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="operation_type"
-                                id="operation_type__comercial"
-                                value="comercial" checked
-                            >
-                            <label class="form-check-label" for="inlineRadio1">Comercial</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="operation_type"
-                                id="operation_type__teste"
-                                value="teste"
-                            >
-                            <label class="form-check-label" for="inlineRadio2">Teste</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <button
-                            id="load_table"
-                            class="btn btn-primary mt-4 fill-column"
-                            type="button"
-                        >
-                            Buscar
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row">   
-                    <button id="check_dou" class="btn btn-success my-2" type="button" >
-                        Verificar dados no D.O.U
-                    </button>
-                </div>
-            </article>
+    <link rel="stylesheet" href="assets/boostrap/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="assets/jquery/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="assets/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="assets/select2/js/select2.min.js"></script>
+    <title>MMGD e Qualidade da energia</title>
+</head>
+<body>
+    <main class="p-2">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">MMGD e Qualidade da energia</h2>
+            </div>
+        </div>
         
-            <article>
-                <table id="table_usinas_operacao" class="table table-bordered" >
-                    <thead>
-                        <tr>
-                            <th>Nome usina</th>
-                            <th>Tipo</th>
-                            <th>Modalidade comercialização</th>
-                            <th>Potência (kW)</th>
-                            <th>Localização</th>
-                            <th>Data liberação teste</th>
-                            <th>Data liberação comercial</th>
-                        </tr>
-                    </thead>
-                </table>
-            </article>
-        </main>
+        <div class="row">
+            <div class="col-md-3 mt-5">
+                <div class="row align-items-center mb-2">
+                    <div class="col-auto">
+                        <label for="ano_qualidade" class="col-form-label">Ano</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="ano_qualidade" id="ano_qualidade" class="form-select">
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="indicador_qualidade">
+                        Indicador
+                        <select name="indicador_qualidade" id="indicador_qualidade" style="width: 60%"></select>
+                    </label>
+                </div>
+                <div class="row align-items-center mb-2">
+                    <div class="col-auto">
+                        <label for="limitar_registros" class="col-form-label">Limitar registros</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="limitar_registros" id="limitar_registros" class="form-select">
+                            <option value="0">Não</option>
+                            <option value="100" selected>100</option>
+                            <option value="1000">1000</option>
+                            <option value="5000">5000</option>
+                            <option value="10000">10000</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="gerar_grafico_qualidade_potencia" type="button" class="btn btn-success">Gerar</button>
+            </div>
+            <div class="col-md-9">
+                <div class="row text-center"><h4>Indicadores de qualidade X Potência acumulada</h4></div>
+                <canvas id="QualidadeEnergiaPotencia"></canvas>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row align-items-center mb-2">
+                    <div class="col-auto">
+                        <label for="ano_potencia_instalada" class="col-form-label">Ano</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="ano_potencia_instalada" id="ano_qualidade" class="form-select">
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-2">
+                    <div class="col-auto">
+                        <label for="limitar_registros_potencia_instalada" class="col-form-label">Limitar registros</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="limitar_registros_potencia_instalada" id="limitar_registros_potencia_instalada" class="form-select">
+                            <option value="0">Não</option>
+                            <option value="100" selected>100</option>
+                            <option value="1000">1000</option>
+                            <option value="5000">5000</option>
+                            <option value="10000">10000</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-2">
+                    <div class="col-auto">
+                        <label for="estado">Estado</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="estado" name="estado" class="form-select">
+                            <option value="0" selected>Todos</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="EX">Estrangeiro</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="gerar_grafico_potencia_tempo" type="button" class="btn btn-info">Gerar</button>
+            </div>
+            <div class="col-md-9">
+                <div class="row text-center"><h4>Potência acumulada ao longo do tempo</h4></div>
+                <canvas id="PotenciaInstalada"></canvas>
+            </div>
+        </div>
         
-        <script type="module" src="js/index.js"></script>
-    </body>
+    </main>
+    <!-- Bootstrap -->
+    <script src="assets/boostrap/js/bootstrap.min.js"></script>
+    <script src="src/url/UrlBuilder.js"></script>
+    <script src="src/dados/IndicadoresConformidade.js"></script>
+    <script src="src/dados/EmpreendimentoGeracaoDistribuida.js"></script>
+    <script src="src/graficos/QualidadeEnergiaPotencia.js"></script>
+    <script src="src/graficos/PotenciaInstalada.js"></script>
+
+    <script src="src/acoes/GerarGraficoQualidade.js"></script>
+    <script src="src/acoes/IndicadoresQualidade.js"></script>
+</body>
 </html>
